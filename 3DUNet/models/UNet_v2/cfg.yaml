@@ -1,0 +1,9 @@
+name: UNet_v2
+
+model: unet_l
+dataset: BraTS2020
+
+training:
+  batch_size: 2
+  optimizer: [Adam, {lr: 0.001}]
+  use_amp: True

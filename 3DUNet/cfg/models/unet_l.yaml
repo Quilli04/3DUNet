@@ -1,0 +1,34 @@
+name: UNet
+layers:
+  # [Module, Parameters]
+
+  # 12.019.780 parameters
+
+  - # Downward_Path
+    - [CBSBlock, {in_channels: 3, out_channels: 24, kernel_size: 3, bias: False}]
+    - [MaxPool3d, {kernel_size: 2, stride: 2}]
+    - [CBSBlock, {in_channels: 24, out_channels: 48, kernel_size: 3, bias: False}]
+    - [MaxPool3d, {kernel_size: 2, stride: 2}]
+    - [CBSBlock, {in_channels: 48, out_channels: 96, kernel_size: 3, bias: False}]
+    - [MaxPool3d, {kernel_size: 2, stride: 2}]
+    - [CBSBlock, {in_channels: 96, out_channels: 192, kernel_size: 3, bias: False}]
+    - [MaxPool3d, {kernel_size: 2, stride: 2}]
+
+  - # Bottleneck:
+    - [CBSBlock, {in_channels: 192, out_channels: 384, kernel_size: 3, bias: False}]
+
+  - # Upward_Path:
+    - [UpConv, {in_channels: 384, out_channels: 192, kernel_size: 1}]
+    - [CBSBlock, {in_channels: 384, out_channels: 192, kernel_size: 3, bias: False}]
+    - [UpConv, {in_channels: 192, out_channels: 96, kernel_size: 1}]
+    - [CBSBlock, {in_channels: 192, out_channels: 96, kernel_size: 3, bias: False}]
+    - [UpConv, {in_channels: 96, out_channels: 48, kernel_size: 1}]
+    - [CBSBlock, {in_channels: 96, out_channels: 48, kernel_size: 3, bias: False}]
+    - [UpConv, {in_channels: 48, out_channels: 24, kernel_size: 1}]
+    - [CBSBlock, {in_channels: 48, out_channels: 24, kernel_size: 3, bias: False}]
+
+  - # Head:
+    - [Head, {in_channels: 24}]  # num_classes received per __init__
+    - [Softmax, {dim: 1}]
+
+# 12018340

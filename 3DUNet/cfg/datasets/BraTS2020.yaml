@@ -1,0 +1,14 @@
+train: D:\datasets\brain_mrt\npy_files\train
+val: D:\datasets\brain_mrt\npy_files\val
+
+name: BraTS2020
+
+num_classes: 4
+labels:
+  - background
+  - NCR/NET
+  - ED
+  - ET
+img_size: 128
+scan_types: [FLAIR, T1CE, T2]
+colors: [green, gold, aqua]

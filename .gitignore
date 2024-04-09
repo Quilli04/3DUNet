@@ -1,0 +1,17 @@
+__pycache__/
+
+*.code-workspace
+.vscode
+.idea
+
+*.log
+
+*.zip
+*.tar.gz
+*.rar
+
+venv/
+*.pt
+*.pth
+*.jpg
+*.png
